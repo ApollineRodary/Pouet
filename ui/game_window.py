@@ -10,4 +10,3 @@ class GameWindow(tkinter.Tk):
 
         self.canvas = GameCanvas(self)
         self.canvas.grid()
-

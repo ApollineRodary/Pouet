@@ -24,9 +24,9 @@ class Button(Object):
         self.update()
 
     def unload(self):
-        super().unload()
         self.canvas.delete(self.rectangle)
         self.canvas.delete(self.label)
+        super().unload()
 
     def update(self):
         super().update()
