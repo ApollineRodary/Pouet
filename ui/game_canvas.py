@@ -1,7 +1,7 @@
 import tkinter
 from .scene import Scene
 
-CANVAS_BACKGROUND_COLOR = "black"
+CANVAS_BACKGROUND_COLOR = "#ffe0e0"
 CANVAS_WIDTH = 1200
 CANVAS_HEIGHT = 800
 
