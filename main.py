@@ -1,9 +1,9 @@
 from ui.game_window import GameWindow
+window = GameWindow()
+
 from scenes.menu import Menu
 from scenes.level import Level
 from scenes.level_selector import LevelSelector
-
-window = GameWindow()
 
 menu = Menu()
 level_selector = LevelSelector()
