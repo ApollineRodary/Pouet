@@ -13,11 +13,7 @@ class Comparator(Block):
 
     def load(self, canvas: tkinter.Canvas):
         super().load(canvas)
-        self.image = canvas.create_image(
-            self.x,
-            self.y,
-            image = COMPARATOR_IMAGE
-        )
+        self.canvas.itemconfig(self.image, image=COMPARATOR_IMAGE)
 
     def unload(self):
         self.canvas.delete(self.image)
