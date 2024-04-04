@@ -15,6 +15,3 @@ class Object:
     def unload(self):
         self.canvas = None
         self.visible = False
-
-    def update(self):
-        pass
