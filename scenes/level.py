@@ -1,5 +1,6 @@
 from ui.scene import Scene
 from objects.button import Button
+from objects.comparator import Comparator
 
 class Level(Scene):
     def __init__(self, name: str):
@@ -16,5 +17,6 @@ class Level(Scene):
 
         super().__init__([
             self.play_button,
-            self.home_button
+            self.home_button,
+            Comparator(100,100)
         ])
