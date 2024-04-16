@@ -1,6 +1,6 @@
 from .object import Object
 import tkinter
-import pyglet, os
+import pyglet
 
 TEXT_COLOR = "black"
 pyglet.font.add_file("assets/font/cat_comic/CatComic.ttf")
