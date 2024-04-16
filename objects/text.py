@@ -1,7 +1,9 @@
 from .object import Object
 import tkinter
+import pyglet, os
 
 TEXT_COLOR = "black"
+pyglet.font.add_file("assets/font/cat_comic/CatComic.ttf")
 
 class Text(Object):
     def __init__(self,text: str, x=600, y=200):
@@ -15,7 +17,8 @@ class Text(Object):
             self.x, self.y,
             text = self.text,
             fill = TEXT_COLOR,
-            font = ('Helvetica', '30', 'bold')
+            font = ('CatComic', '30', 'bold'),
+            width = 900
         )
 
 
