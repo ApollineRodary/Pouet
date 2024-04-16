@@ -13,6 +13,9 @@ def move_towards(origin: int, target: int, speed: int):
         return max(target, origin - speed)
     return origin
 
+def smootherstep(x):
+    return 6*x**5 - 15*x**4 + 10*x**3
+
 class LightBeam(Object):
     def __init__(self, x: int, y: int, value: int):
         super().__init__(x, y)
@@ -36,6 +39,12 @@ class LightBeam(Object):
         # Blocks that have already been traversed and should be ignored
         self.blocks_to_ignore = []
 
+        #
+        self.offset_origin = None
+        self.offset_target = None
+        self.offset_length = 0
+        self.offset_progress = 0
+
     def load(self, canvas: tkinter.Canvas):
         super().load(canvas)
 
@@ -46,11 +55,15 @@ class LightBeam(Object):
 
     def tick(self):
         self.new_x = self.current_x + STEP_SIZE
-        self.new_y = move_towards(
-            origin = self.current_y,
-            target = self.target_y,
-            speed = OFFSET_SPEED
-        )
+        self.new_y = self.current_y
+        if self.offset_length > 0:
+            self.offset_progress = min(
+                self.offset_progress + STEP_SIZE,
+                self.offset_length
+            )
+            dy = smootherstep(self.offset_progress / self.offset_length) \
+                * (self.offset_target - self.offset_origin)
+            self.new_y = self.offset_origin + dy
 
         # If the beam should be bent upwards or downwards, create a new segment
         if self.new_y != self.last_y:
@@ -75,5 +88,8 @@ class LightBeam(Object):
             [self.last_x, self.last_y, self.current_x, self.current_y]
         )
 
-    def offset(self, dy: int):
-        self.target_y = self.current_y + dy
+    def offset(self, dy: int, length: int):
+        self.offset_origin = self.current_y
+        self.offset_progress = 0
+        self.offset_length = length
+        self.offset_target = self.current_y + dy

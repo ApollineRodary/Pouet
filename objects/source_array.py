@@ -68,7 +68,7 @@ class SourceArray(Object):
 
             permutation = block.on_traversed(input_values)
             for i, beam in enumerate(input_beams):
-                beam.offset(SOURCE_DISTANCE * (permutation[i] - i))
+                beam.offset(SOURCE_DISTANCE * (permutation[i] - i), 100)
                 beam.blocks_to_ignore.append(block)
 
         self.loop_task_id = self.canvas.after(TICK_TIME, self.tick)
