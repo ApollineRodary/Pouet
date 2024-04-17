@@ -1,11 +1,13 @@
 from .object import Object
 import tkinter
-from playsound import playsound
+import pygame.mixer
 
 BUTTON_LABEL_COLOR = "#ffaa00"
 BUTTON_LABEL_HOVER_COLOR = "#ff8000"
 
 SPRITE_BUTTON = tkinter.PhotoImage(file="assets/textures/button.png")
+
+BUTTON_PRESS_SOUND = pygame.mixer.Sound("assets/sounds/button.wav")
 
 class Button(Object):
     def __init__(
@@ -39,7 +41,7 @@ class Button(Object):
 
         self.canvas.tag_bind(
             self.tag, "<Button-1>",
-            lambda _: playsound("assets/sounds/button.wav", block=False)
+            lambda _: BUTTON_PRESS_SOUND.play()
         )
         self.canvas.tag_bind(self.tag, "<Enter>", self.on_hover)
         self.canvas.tag_bind(self.tag, "<Leave>", self.on_leave)

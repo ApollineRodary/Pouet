@@ -2,10 +2,13 @@ from .object import Object
 from .target import Target
 from .light_beam import LightBeam
 import tkinter
-from playsound import playsound
+import pygame.mixer
 
 TARGET_DISTANCE = 60
 TICK_TIME = 20
+
+CORRECT_SOUND = pygame.mixer.Sound("assets/sounds/correct.mp3")
+WRONG_SOUND = pygame.mixer.Sound("assets/sounds/wrong.mp3")
 
 class TargetArray(Object):
     def __init__(self, x: int, y: int, targets: int):
@@ -51,11 +54,8 @@ class TargetArray(Object):
             else:
                 self.canvas.after(i*200, target.set_correct)
 
+        sound = CORRECT_SOUND if all_correct else WRONG_SOUND
         self.canvas.after(
             len(self.targets)*200 + 1600,
-            lambda: playsound(
-                'assets/sounds/correct.mp3' if all_correct
-                else 'assets/sounds/wrong.mp3',
-                block=False
-            )
+            sound.play
         )

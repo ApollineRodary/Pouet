@@ -1,6 +1,6 @@
 from .object import Object
-from playsound import playsound
 import tkinter
+import pygame.mixer
 
 TARGET_RADIUS = 5
 TARGET_WIDTH = 2
@@ -8,6 +8,9 @@ TARGET_OUTLINE_COLOR = "orange"
 
 SPRITE_WRONG = tkinter.PhotoImage(file="assets/textures/wrong_value.png")
 SPRITE_CORRECT = tkinter.PhotoImage(file="assets/textures/correct_value.png")
+
+DEFEAT_SOUND = pygame.mixer.Sound("assets/sounds/defeat.mp3")
+VICTORY_SOUND = pygame.mixer.Sound("assets/sounds/victory.mp3")
 
 class Target(Object):
     def load(self, canvas: tkinter.Canvas):
@@ -30,7 +33,7 @@ class Target(Object):
         super().unload()
 
     def set_wrong(self):
-        playsound('assets/sounds/defeat.mp3', block=False)
+        DEFEAT_SOUND.play()
         if self.image:
             self.canvas.delete(self.image)
         self.image = self.canvas.create_image(
@@ -39,7 +42,7 @@ class Target(Object):
         )
 
     def set_correct(self):
-        playsound('assets/sounds/victory.mp3', block=False)
+        VICTORY_SOUND.play()
         if self.image:
             self.canvas.delete(self.image)
         self.image = self.canvas.create_image(

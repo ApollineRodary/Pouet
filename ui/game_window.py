@@ -1,4 +1,5 @@
 import tkinter
+import pygame.mixer
 from .game_canvas import GameCanvas
 
 TITLE = "Pouet :)"
@@ -10,3 +11,5 @@ class GameWindow(tkinter.Tk):
 
         self.canvas = GameCanvas(self)
         self.canvas.grid()
+
+        pygame.mixer.init()

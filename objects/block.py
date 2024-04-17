@@ -1,6 +1,9 @@
 from .object import Object
 import tkinter
-from playsound import playsound
+import pygame.mixer
+
+DROP_BLOCK_SOUND = pygame.mixer.Sound("assets/sounds/drop_block.wav")
+DRAG_BLOCK_SOUND = pygame.mixer.Sound("assets/sounds/drag_block.mp3")
 
 class Block(Object):
     def __init__(self, x: int, y: int, size: int, sprites: dict):
@@ -37,11 +40,11 @@ class Block(Object):
             self.canvas.coords(self.image, [xd, yd])
 
     def on_drop(self, event):
-        playsound('assets/sounds/drop_block.wav', block=False)
+        DROP_BLOCK_SOUND.play()
         self.canvas.itemconfig(self.image, image=self.sprites["hovered"])
 
     def on_start(self, event):
-        playsound('assets/sounds/drag_block.mp3', block=False)
+        DRAG_BLOCK_SOUND.play()
         self.canvas.itemconfig(self.image, image=self.sprites["clicked"])
         self.canvas.after(
             100,
