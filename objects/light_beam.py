@@ -39,7 +39,6 @@ class LightBeam(Object):
         # Blocks that have already been traversed and should be ignored
         self.blocks_to_ignore = []
 
-        #
         self.offset_origin = None
         self.offset_target = None
         self.offset_length = 0

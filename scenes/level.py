@@ -2,6 +2,7 @@ from ui.scene import Scene
 from objects.button import Button
 from objects.comparator import Comparator
 from objects.source_array import SourceArray
+from objects.target_array import TargetArray
 
 class Level(Scene):
     def __init__(self, name: str):
@@ -16,17 +17,22 @@ class Level(Scene):
             text = "Back"
         )
         self.source_array = SourceArray(80, 100, 6)
+        self.target_array = TargetArray(1120, 100, 6)
         self.comparators = [
-            Comparator(100 + i*10, 400 + i*10) for i in range(13)
+            Comparator(100 + i*10, 400 + i*10) for i in range(15)
         ]
         self.play_button.set_command(
-            lambda _: self.source_array.activate(self.comparators)
+            lambda _: self.source_array.activate(
+                self.comparators,
+                self.target_array
+            )
         )
 
         super().__init__(
             self.comparators + [
                 self.play_button,
                 self.home_button,
-                self.source_array
+                self.source_array,
+                self.target_array
             ]
         )

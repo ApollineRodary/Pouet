@@ -2,6 +2,7 @@ from .object import Object
 from .source import Source
 from .block import Block
 from .light_beam import LightBeam
+from .target_array import TargetArray
 import tkinter
 
 SOURCE_DISTANCE = 60
@@ -30,11 +31,12 @@ class SourceArray(Object):
             source.unload()
         super().unload()
 
-    def activate(self, blocks: list[Block]):
+    def activate(self, blocks: list[Block], target: TargetArray):
         if self.active:
             self.deactivate()
 
         self.blocks = blocks
+        self.target = target
         for value, source in enumerate(self.sources):
             beam = LightBeam(source.x, source.y, 5-value)
             beam.load(self.canvas)
@@ -51,7 +53,6 @@ class SourceArray(Object):
 
         for block in self.blocks:
             x1, y1, x2, y2 = self.canvas.bbox(block.image)
-            # intersects_bbox = self.canvas.find_overlapping(x1, y1, x2, y2)
             input_beams = list(filter(
                 lambda beam: (
                     x1 < beam.current_x < x2
@@ -71,7 +72,11 @@ class SourceArray(Object):
                 beam.offset(SOURCE_DISTANCE * (permutation[i] - i), 100)
                 beam.blocks_to_ignore.append(block)
 
-        self.loop_task_id = self.canvas.after(TICK_TIME, self.tick)
+        beam_position = self.beams[0].current_x
+        if beam_position < self.target.x:
+            self.loop_task_id = self.canvas.after(TICK_TIME, self.tick)
+        else:
+            self.target.verify(self.beams)
 
     def deactivate(self):
         for beam in self.beams:
