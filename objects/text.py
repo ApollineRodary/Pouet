@@ -3,7 +3,6 @@ import tkinter
 import pyglet
 
 TEXT_COLOR = "black"
-pyglet.font.add_file("assets/font/cat_comic/CatComic.ttf")
 
 class Text(Object):
     def __init__(self,text: str, x=600, y=200):

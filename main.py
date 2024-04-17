@@ -4,6 +4,9 @@ window = GameWindow()
 from scenes.menu import Menu
 from scenes.level_selector import LevelSelector
 import levels
+import pyglet
+
+pyglet.font.add_file("assets/font/cat_comic/CatComic.ttf")
 
 menu = Menu()
 level_selector = LevelSelector()
