@@ -18,7 +18,7 @@ class LevelSelector(Scene):
         self.level_buttons = []
         super().__init__([self.home_button])
 
-    def add_level(self, level: Level, name: str):
+    def add_level(self, level: Level):
         """Adds a level to the level selector"""
 
         # Find grid position of the level button
@@ -29,7 +29,7 @@ class LevelSelector(Scene):
             x = HORIZONTAL_GRID_MARGIN + (BUTTON_SIZE+BUTTON_SPACING) * grid_x,
             y = VERTICAL_GRID_MARGIN + (BUTTON_SIZE+BUTTON_SPACING) * grid_y,
             width = BUTTON_SIZE, height = BUTTON_SIZE,
-            text = name
+            text = level.name
         )
 
         # Place button and bind it to the corresponding level
