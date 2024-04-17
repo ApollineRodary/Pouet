@@ -2,6 +2,7 @@ from .object import Object
 from .target import Target
 from .light_beam import LightBeam
 import tkinter
+from playsound import playsound
 
 TARGET_DISTANCE = 60
 TICK_TIME = 20
@@ -31,6 +32,7 @@ class TargetArray(Object):
     def verify(self, beams: list[LightBeam]):
         values = sorted([beam.value for beam in beams])
 
+        all_correct = True
         for i, target in enumerate(self.targets):
             x1, y1, x2, y2 = self.canvas.bbox(target.circle)
             input_beams = list(filter(
@@ -45,6 +47,15 @@ class TargetArray(Object):
             beam = input_beams[0]
             if beam.value != values[i]:
                 self.canvas.after(i*200, target.set_wrong)
+                all_correct = False
             else:
                 self.canvas.after(i*200, target.set_correct)
 
+        self.canvas.after(
+            len(self.targets)*200 + 1600,
+            lambda: playsound(
+                'assets/sounds/correct.mp3' if all_correct
+                else 'assets/sounds/wrong.mp3',
+                block=False
+            )
+        )

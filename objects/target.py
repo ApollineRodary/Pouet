@@ -1,4 +1,5 @@
 from .object import Object
+from playsound import playsound
 import tkinter
 
 TARGET_RADIUS = 5
@@ -29,12 +30,18 @@ class Target(Object):
         super().unload()
 
     def set_wrong(self):
+        playsound('assets/sounds/defeat.mp3', block=False)
+        if self.image:
+            self.canvas.delete(self.image)
         self.image = self.canvas.create_image(
             self.x, self.y,
             image = SPRITE_WRONG
         )
 
     def set_correct(self):
+        playsound('assets/sounds/victory.mp3', block=False)
+        if self.image:
+            self.canvas.delete(self.image)
         self.image = self.canvas.create_image(
             self.x, self.y,
             image = SPRITE_CORRECT
