@@ -16,6 +16,7 @@ class LevelSelector(Scene):
             text = "Back"
         )
         self.level_buttons = []
+        self.scenes = []
         super().__init__([self.home_button])
 
     def add_level(self, level: Level):
@@ -38,7 +39,15 @@ class LevelSelector(Scene):
         self.objects.append(button)
 
         # Bind the home button of the level to the level selector
-        level.home_button.set_command(
-            lambda _: level.home_button.canvas.load(self)
-        )
+        if hasattr(level,'home_button'):
+            level.home_button.set_command(
+                lambda _: level.home_button.canvas.load(self)
+            )
+        self.add_scene(level)
+
+    def add_scene(self, scene: Scene):
+        if self.scenes != []:
+            self.scenes[-1].next = scene
+        self.scenes.append(scene)
+
 

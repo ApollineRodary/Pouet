@@ -4,7 +4,9 @@ window = GameWindow()
 from scenes.menu import Menu
 from scenes.level_selector import LevelSelector
 import levels
+from scenes.level import Level
 import pyglet
+from scenes.victory import Victory
 
 pyglet.font.add_file("assets/font/cat_comic/CatComic.ttf")
 
@@ -18,8 +20,13 @@ level_selector.home_button.set_command(
     lambda _: window.canvas.load(menu)
 )
 
-for level in levels.levels:
-    level_selector.add_level(level)
+for scene in levels.scenes:
+    if isinstance(scene,Level):
+        level_selector.add_level(scene)
+        level_selector.add_scene(Victory())
+    else:
+        level_selector.add_scene(scene)
+level_selector.scenes[-1].next = menu
 
 window.canvas.load(menu)
 window.mainloop()

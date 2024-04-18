@@ -14,3 +14,6 @@ class Scene:
     def unload(self):
         for object in self.objects:
             object.unload()
+
+    def add_next(self, next):
+        self.next = next

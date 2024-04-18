@@ -6,7 +6,7 @@ from objects.picture import Picture
 
 
 class Explanation(Scene):
-    def __init__(self, expl: str, picture: str, size, next: Scene):
+    def __init__(self, expl: str, picture: str, size):
         self.next_button = Button(
             x = 1050, y = 650,
             width = 200, height = 200,
@@ -35,4 +35,4 @@ class Explanation(Scene):
 
         super().__init__(init)
 
-        self.next_button.set_command(lambda _: self.next_button.canvas.load(next))
+        self.next_button.set_command(lambda _: self.next_button.canvas.load(self.next))

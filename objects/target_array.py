@@ -32,6 +32,9 @@ class TargetArray(Object):
             target.unload()
         super().unload()
 
+    def change_scene(self):
+        self.canvas.load(self.canvas.scene.next)
+
     def verify(self, beams: list[LightBeam]):
         values = sorted([beam.value for beam in beams])
 
@@ -58,4 +61,9 @@ class TargetArray(Object):
         self.canvas.after(
             len(self.targets)*200 + 1600,
             sound.play
+        )
+        if all_correct:
+            self.canvas.after(
+                len(self.targets)*200 + 2500,
+                self.change_scene
         )

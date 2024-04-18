@@ -5,7 +5,7 @@ from objects.picture import Picture
 
 
 class Victory(Scene):
-    def __init__(self, next: Scene):
+    def __init__(self):
         self.next_button = Button(
             x = 1050, y = 650,
             width = 200, height = 200,
@@ -28,5 +28,5 @@ class Victory(Scene):
         ])
 
         self.next_button.set_command(
-            lambda _: self.next_button.canvas.load(next)
+            lambda _: self.next_button.canvas.load(self.next)
         )
