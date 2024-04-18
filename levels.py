@@ -38,7 +38,7 @@ scenes = [
     Explanation("Hello! \n"
                 "In this game, you will have to build a rainbow! For the first "
                 "levels, sort the colours in the reverse order: the one on top "
-                "has to go to the bottom and so on. To do so, use comparators like the one below."
+                "has to go to the bottom and so on. To do so, use comparators like the one below. "
                 "It takes two colours, and puts them in the right order. \nGood luck!",
                 'assets/textures/comparator_idle.png', (200, 200)),
     start_level,
@@ -49,7 +49,7 @@ scenes = [
     Explanation('Let us see if you got the trick...','',0),
     compare_six,
     Explanation('This pattern is called the odd-even transposition sorting network. It consists of several columns of comparators. More precisely, to sort a number of colours, we repeat half as many times the following: a first column that covers all wires ("odd step"), and a second column that covers all wires but the top and bottom ones ("even step").','',0),
-    Explanation("In this scenario, only colours that are next to each other can be sorted."
+    Explanation("In this scenario, only colours that are next to each other can be sorted. "
                 "When that is the case, we cannot build a pattern that uses fewer comparators"
                 " than the odd-even transposition sorting network.\n \n"
                 "Fun fact: if your pattern can sort a rainbow that is in the reverse order,"
